@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "pais")
@@ -26,7 +26,7 @@ public class PaisEntity {
     @JoinColumn(name = "continente_id", insertable = false, updatable = false)
     private ContinenteEntity continente;
 
-    @Column(name = "continente:id", nullable = false)
+    @Column(name = "continente_id", nullable = false)
     private Long continenteId;
 
     @ManyToMany(cascade = {
@@ -34,10 +34,18 @@ public class PaisEntity {
             CascadeType.MERGE
     })
     @JoinTable(
-            name = "icon-pais",
+            name = "icon_pais",
             joinColumns = @JoinColumn(name = "pais_id"),
             inverseJoinColumns = @JoinColumn(name = "icon_id"))
-    private Set<IconEntity> icons = new HashSet<>();
+    private List<IconEntity> icons = new ArrayList<>();
 
-
+    /**@ManyToMany(cascade = CascadeType.ALL,
+            targetEntity = PaisEntity.class
+    )
+    @JoinTable(
+            name = "icon_pais",
+            joinColumns = @JoinColumn(name = "pais_id"),
+            inverseJoinColumns = @JoinColumn(name = "icon_id"))
+    private List<IconEntity> icons = new ArrayList<>();
+    */
 }
