@@ -9,5 +9,4 @@ public class IconsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(IconsApplication.class, args);
 	}
-
 }
